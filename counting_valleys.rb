@@ -1,4 +1,5 @@
-require 'awesome_print'
+# https://www.hackerrank.com/challenges/counting-valleys/problem
+# require 'awesome_print'
 
 def countingValleys(steps, path)
   valleys = 0
