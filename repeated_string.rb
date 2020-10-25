@@ -1,3 +1,4 @@
+# https://www.hackerrank.com/challenges/repeated-string/problem
 require 'bigdecimal'
 
 def repeatedString(s, n)
