@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/minimum-distances
+
 def minimumDistances(a)
   distances = []
 
