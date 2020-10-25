@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/diagonal-difference
+
 def diagonalDifference(arr)
   size = arr.length
 
