@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/staircase
+
 def staircase(n)
   n.times do |i|
     spaces = n - i - 1
