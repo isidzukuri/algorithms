@@ -1,3 +1,5 @@
+# https://www.hackerrank.com/challenges/dijkstrashortreach/problem
+
 # frozen_string_literal: true
 
 require 'benchmark'
