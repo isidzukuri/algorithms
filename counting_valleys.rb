@@ -6,7 +6,10 @@ def countingValleys(steps, path)
   above_sea_level = 0
   valley_starts = nil
   valley_ends = nil
-    
+
+
+
+  
   path.split('').each do |step|
     above_sea_level_before_step = above_sea_level
 
