@@ -4,12 +4,12 @@ require 'bigdecimal'
 def repeatedString(s, n)
   pattern_repeats = BigDecimal(n)/s.length
 
-  count = s.count('a') * pattern_repeats.floor
+  count = s.count(s) * pattern_repeats.floor
 
   if pattern_repeats > pattern_repeats.floor 
     to_index = (BigDecimal(s.length) * (pattern_repeats - pattern_repeats.floor)).ceil - 1
 
-    tail_count = s[0..to_index].count('a')
+    tail_count = s[0..to_index].count(s)
 
     count += tail_count
   end
