@@ -1,11 +1,12 @@
 https://leetcode.com/problems/snapshot-array/
 
-use std::collections::HashMap;
+    use std::collections::HashMap;
 
 struct SnapshotArray {
     store: HashMap<i32, HashMap<i32, i32>>,
     snap_index: i32
 }
+
 
 /** 
  * `&self` means the method takes an immutable reference.
@@ -45,21 +46,36 @@ impl SnapshotArray {
                 match val_snaps.get(&snap_id) {
                     Some(val_snap) => { return *val_snap },
                     _ => {
-                        if snap_id < *val_snaps.keys().min().unwrap() {
+                        let mut first_snap_id = None;
+                        let mut last_snap_id = None;
+                        let mut max_snap_id_constraint = 0;
+                        let mut keys = val_snaps.keys();
+
+                        while let Some(s_id) = keys.next() {
+                            if let Some(fst) = first_snap_id {
+                                if fst > s_id { first_snap_id = Some(s_id); }
+                            } else {
+                                first_snap_id = Some(s_id);
+                            }
+                            if let Some(lst) = last_snap_id {
+                                if lst < s_id { last_snap_id = Some(s_id); }
+                            } else {
+                                last_snap_id = Some(s_id);
+                            }
+                            if *s_id < snap_id && max_snap_id_constraint < *s_id { 
+                                max_snap_id_constraint = *s_id 
+                            }; 
+                        }
+
+                        if snap_id < *first_snap_id.unwrap() {
                             return Self::DEFAULT_VALUE
                         } 
                         
-                        let last_snap_id = *val_snaps.keys().max().unwrap();
-                        if snap_id > last_snap_id{
-                           return *val_snaps.get(&last_snap_id).unwrap()
+                        if snap_id > *last_snap_id.unwrap(){
+                           return *val_snaps.get(&last_snap_id.unwrap()).unwrap()
                         }
 
-                        let mut max = 0;
-                        let mut keys = val_snaps.keys();
-                        while let Some(s_id) = keys.next() {
-                            if *s_id < snap_id && max < *s_id { max = *s_id }; 
-                        }
-                        return *val_snaps.get(&max).unwrap()
+                        return *val_snaps.get(&max_snap_id_constraint).unwrap()
                     }
                 }
             },
