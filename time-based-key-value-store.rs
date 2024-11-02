@@ -22,11 +22,11 @@ impl TimeMap {
             Some(val_snaps) => { 
                 let pos = val_snaps.binary_search_by(|item| item.0.cmp(&timestamp))
                                    .unwrap_or_else(|elm| elm);
-                val_snaps.insert(pos, (timestamp.clone(), value));
+                val_snaps.insert(pos, (timestamp, value));
             },
             _ => {
                let mut first_snap = Vec::new();
-                first_snap.push((timestamp.clone(), value));
+                first_snap.push((timestamp, value));
                 self.store.insert(key, first_snap);
             }
         };
