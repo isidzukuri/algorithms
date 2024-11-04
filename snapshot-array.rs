@@ -1,6 +1,6 @@
-https://leetcode.com/problems/snapshot-array/
+// https://leetcode.com/problems/snapshot-array/
 
-    use std::collections::HashMap;
+use std::collections::HashMap;
 
 struct SnapshotArray {
     store: HashMap<i32, HashMap<i32, i32>>,
