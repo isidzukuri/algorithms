@@ -35,8 +35,6 @@ impl Solution {
                 }
             }
         }
-        return dependants_count.values().all(|cnt| *cnt == 0 );
-
-        true
+        dependants_count.values().all(|cnt| *cnt == 0 )
     }
 }
