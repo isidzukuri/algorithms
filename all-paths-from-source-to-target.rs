@@ -1,7 +1,5 @@
 // https://leetcode.com/problems/all-paths-from-source-to-target
 
-use std::collections::VecDeque;
-
 impl Solution {
     pub fn all_paths_source_target(graph: Vec<Vec<i32>>) -> Vec<Vec<i32>> {
         let destination = (graph.len() - 1) as i32;  
