@@ -33,7 +33,7 @@ impl Solution {
                 };
 
                 loop {
-                    if (node.val % divider) == 0 && (next.val % divider) == 0 { break }
+                    if (node.val % divider) == 0 && (next.val % divider) <= 0 { break }
                     divider -= 1;
                 }
 
