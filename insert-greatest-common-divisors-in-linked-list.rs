@@ -26,18 +26,8 @@ impl Solution {
 
         while let Some(ref mut node) = cur {
             if let Some(next) = node.next.as_ref() {
-                let mut divider = if node.val > next.val {
-                    node.val
-                } else {
-                    next.val
-                };
-
-                loop {
-                    if (node.val % divider) == 0 && (next.val % divider) <= 0 { break }
-                    divider -= 1;
-                }
-
-                let mut insert = Box::new(ListNode { val: divider, next: node.next.take()});
+                let mut insert = Box::new(ListNode { val: Self::common_divisor(node.val, next.val), 
+                                                     next: node.next.take()});
                 node.next = Some(insert);
                 cur = &mut node.next.as_mut().unwrap().next;
             } else {
@@ -45,5 +35,19 @@ impl Solution {
             }
         }
         new_list
+    }
+
+    fn common_divisor(v1: i32, v2: i32) -> i32 {
+        let mut divisor = if v1 > v2 {
+            v1
+        } else {
+            v2
+        };
+
+        loop {
+            if (v1 % divisor) == 0 && (v2 % divisor) <= 0 { break }
+            divisor -= 1;
+        }
+        divisor
     }
 }
