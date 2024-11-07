@@ -15,3 +15,5 @@
 https://www.cs.usfca.edu/~galles/visualization/AVLtree.html
 
 https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
+
+https://en.wikipedia.org/wiki/List_of_algorithms
