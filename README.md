@@ -1,5 +1,7 @@
 ## Useful links
 
+[Comprehensive collection of knowledge: videos, pdfs, implementations](https://github.com/williamfiset/Algorithms)
+
 [Datastructure cheat sheet short](https://www.interviewcake.com/data-structures-reference)
 
 [Datastructure cheat sheet with explenations](https://zerotomastery.io/cheatsheets/data-structures-and-algorithms-cheat-sheet/)
