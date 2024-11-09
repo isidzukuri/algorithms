@@ -26,6 +26,10 @@ https://en.wikipedia.org/wiki/List_of_algorithms
 
 In standard BFS scenarios, a visited array or set is diligently maintained to steer clear of revisiting nodes. However, BFS with Bitmasking challenges this norm. Nodes, instead of being dismissed, are revisited, now equipped with an additional layer of information — the state. This state, often represented by a bitmask, augments the node’s identity, enriching the exploration process. Used in solution of Travelling salesman problem.
 
+[TSP solution with BFS + Bitmasking video explanation pt1](https://www.youtube.com/watch?v=cY4HiiFHO1o)
+
+[TSP solution with BFS + Bitmasking video explanation pt2, code](https://www.youtube.com/watch?v=udEe7Cv3DqU)
+
 ### [Bitmasking](https://www.geeksforgeeks.org/what-is-bitmasking/)
 
 In computer programming, the process of modifying and utilizing binary representations of numbers or any other data is known as bitmasking.
