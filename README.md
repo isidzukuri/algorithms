@@ -18,4 +18,14 @@ https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
 
 https://en.wikipedia.org/wiki/List_of_algorithms
 
+### Pathfiding
+
 <img src="/misc/shortest_path_algorithms.jpg" width="600">
+
+##### BFS with Bitmasking
+
+In standard BFS scenarios, a visited array or set is diligently maintained to steer clear of revisiting nodes. However, BFS with Bitmasking challenges this norm. Nodes, instead of being dismissed, are revisited, now equipped with an additional layer of information — the state. This state, often represented by a bitmask, augments the node’s identity, enriching the exploration process. Used in solution of Travelling salesman problem.
+
+### [Bitmasking](https://www.geeksforgeeks.org/what-is-bitmasking/)
+
+In computer programming, the process of modifying and utilizing binary representations of numbers or any other data is known as bitmasking.
