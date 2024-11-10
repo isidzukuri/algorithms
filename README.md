@@ -18,6 +18,8 @@ https://www.cs.usfca.edu/~galles/visualization/RedBlack.html
 
 https://en.wikipedia.org/wiki/List_of_algorithms
 
+## Graphs
+
 ### Pathfiding
 
 <img src="/misc/shortest_path_algorithms.jpg" width="600">
@@ -30,6 +32,24 @@ In standard BFS scenarios, a visited array or set is diligently maintained to st
 
 [TSP solution with BFS + Bitmasking video explanation pt2, code](https://www.youtube.com/watch?v=udEe7Cv3DqU)
 
-### [Bitmasking](https://www.geeksforgeeks.org/what-is-bitmasking/)
+### Eulerian circuit and path
+
+<img src="/misc/eulerianPath.jpg" width="600">
+
+<img src="/misc/eulerian_circuit.jpg" width="600">
+
+### Network flow
+
+<img src="/misc/nf1_network_flow_1.jpg" width="600">
+
+<img src="/misc/nf2_bipartite_matching.jpg" alt="bipartite matching" width="600">
+
+<img src="/misc/nf3.jpg" width="600">
+
+See also: bipartite matching, capacity scaling
+
+[source](https://www.udemy.com/share/101ubu3@22ylwZTQ6HOB4dMz4Zhfhz4Fk5-oDK8-AQUda9PoipxUSg40tWnaiPk_gcJ8wZvW/)
+
+## [Bitmasking](https://www.geeksforgeeks.org/what-is-bitmasking/)
 
 In computer programming, the process of modifying and utilizing binary representations of numbers or any other data is known as bitmasking.
