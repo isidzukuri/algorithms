@@ -55,3 +55,5 @@ See also: bipartite matching, capacity scaling
 ## [Bitmasking](https://www.geeksforgeeks.org/what-is-bitmasking/)
 
 In computer programming, the process of modifying and utilizing binary representations of numbers or any other data is known as bitmasking.
+
+See also chapter 10 "Bit manipulation", "Competitive programmer's handbook" by Antti Laaksonen
