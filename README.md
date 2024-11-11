@@ -20,6 +20,8 @@ https://en.wikipedia.org/wiki/List_of_algorithms
 
 ## Graphs
 
+[algorithms cheat sheet](https://rapidsheets.net/cheat_sheet/algorithms/graph_algorithms)
+
 ### Pathfiding
 
 <img src="/misc/shortest_path_algorithms.jpg" width="600">
