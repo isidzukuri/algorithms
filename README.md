@@ -52,6 +52,8 @@ See also: bipartite matching, capacity scaling
 
 [source](https://www.udemy.com/share/101ubu3@22ylwZTQ6HOB4dMz4Zhfhz4Fk5-oDK8-AQUda9PoipxUSg40tWnaiPk_gcJ8wZvW/)
 
+[youtube](https://www.youtube.com/watch?v=LdOnanfc5TM&list=PLDV1Zeh2NRsDj3NzHbbFIC58etjZhiGcG)
+
 ## [Bitmasking](https://www.geeksforgeeks.org/what-is-bitmasking/)
 
 In computer programming, the process of modifying and utilizing binary representations of numbers or any other data is known as bitmasking.
