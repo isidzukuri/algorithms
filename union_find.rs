@@ -1,0 +1,68 @@
+pub struct UnionFind {
+    parent: Vec<usize>,
+    rank: Vec<usize>,
+}
+
+impl UnionFind {
+    // Create a new universe of n isolated elements
+    pub fn new(n: usize) -> Self {
+        Self {
+            parent: (0..n).collect(),
+            rank: vec![0; n],
+        }
+    }
+
+    // Find the representative root of element i with path compression
+    pub fn find(&mut self, mut i: usize) -> usize {
+        // Find the root
+        let mut root = i;
+        while root != self.parent[root] {
+            root = self.parent[root];
+        }
+        
+        // Path compression: point all visited nodes directly to the root
+        let mut curr = i;
+        while curr != root {
+            let nxt = self.parent[curr];
+            self.parent[curr] = root;
+            curr = nxt;
+        }
+        
+        root
+    }
+
+    // Unify the sets containing element i and element j
+    // Returns true if a merge happened, false if they were already in the same set
+    pub fn union(&mut self, i: usize, j: usize) -> bool {
+        let root_i = self.find(i);
+        let root_j = self.find(j);
+
+        if root_i == root_j {
+            return false;
+        }
+
+        // Union by rank: attach smaller depth tree under root of deeper tree
+        match self.rank[root_i].cmp(&self.rank[root_j]) {
+            std::cmp::Ordering::Less => self.parent[root_i] = root_j,
+            std::cmp::Ordering::Greater => self.parent[root_j] = root_i,
+            std::cmp::Ordering::Equal => {
+                self.parent[root_j] = root_i;
+                self.rank[root_i] += 1;
+            }
+        }
+        true
+    }
+}
+
+
+
+
+fn main() {
+    let mut uf = UnionFind::new(5);
+    
+    uf.union(0, 2);
+    uf.union(4, 2);
+    
+    assert_eq!(uf.find(0), uf.find(4)); // 0 and 4 are now in the same set
+    assert_ne!(uf.find(1), uf.find(3)); // 1 and 3 are isolated
+}

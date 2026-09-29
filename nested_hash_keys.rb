@@ -13,12 +13,12 @@ hash_obj = {
   }
 }
 
-def nested_hash_keys(hash_obj, parent = nil)
+def nested_hash_keys(hash_obj)
   pathes = []
 
   hash_obj.each do |key, value|
     if value.is_a? Hash
-      nested_hash_keys(value, [parent, key]).each do |path|
+      nested_hash_keys(value).each do |path|
         pathes << [key].push(path).flatten
       end
     else

@@ -1,0 +1,34 @@
+# https://leetcode.com/problems/flatten-binary-tree-to-linked-list/
+
+
+
+# Iterative Pointer Rewiring (Morris Traversal Technique)
+
+
+# Definition for a binary tree node.
+# class TreeNode
+#     attr_accessor :val, :left, :right
+#     def initialize(val = 0, left = nil, right = nil)
+#         @val = val
+#         @left = left
+#         @right = right
+#     end
+# end
+# @param {TreeNode} root
+# @return {Void} Do not return anything, modify root in-place instead.
+def flatten(root)
+    curr = root
+
+    while curr
+        if curr.left
+            rightmost = curr.left
+            rightmost = rightmost.right while rightmost.right
+            rightmost.right = curr.right
+
+            curr.right = curr.left
+            curr.left = nil
+        end
+
+        curr = curr.right
+    end
+end
