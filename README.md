@@ -408,6 +408,69 @@ If edge weights can **only be 0 or 1**:
 * **For 0-1 edge weights:** Use a **`VecDeque`** (0-1 BFS).
 * **For production high-performance graph engines:** Use a **4-ary Heap** or **Radix Heap**.
 
+# Probabilistic Data Structures Cheat Sheet
+
+A **Probabilistic Data Structure** uses randomized algorithms to trade absolute accuracy for extreme efficiency in memory usage and time complexity ($O(1)$ operations). They are ideal for massive datasets (Big Data, streaming data) where exact precision is unnecessary.
+
+---
+
+## Quick Reference Matrix
+
+| Data Structure | Practical Use Cases | Primary Problem / Use Case | Key Operations | Time Complexity | Memory Usage | Guarantees / Error Profile |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Bloom Filter** | Web cache filtering, malicious URL detection, avoiding unnecessary disk reads (Cassandra, RocksDB). | Set Membership Test | `Insert`, `Lookup` | `O(k)` | Constant / Bit array | **False Positives** possible; **No False Negatives**. Deletions not supported. |
+| **Counting Bloom Filter** | Dynamic streaming applications, tracking active IP connections where items leave the set, router cache management. | Set Membership with Deletions | `Insert`, `Lookup`, `Delete` | `O(k)` | Higher (Counters per bucket) | **False Positives** possible; **No False Negatives**. |
+| **Cuckoo Filter** | High-performance content delivery networks (CDNs), resource-constrained set membership, dynamic network routing tables. | Set Membership with Deletions & High Load | `Insert`, `Lookup`, `Delete` | `O(1)` | Compact (Fingerprints) | **False Positives** possible; **No False Negatives**. Better space than Bloom for low FPR. |
+| **HyperLogLog (HLL)** | Tracking unique active users (DAU/MAU), SQL `COUNT(DISTINCT)` queries in analytical engines (Presto, BigQuery, Redis). | Cardinality (Count-Distinct) Estimation | `Add`, `Count` | `O(1)` | Very low (~1.5 KB for millions) | Relative standard error ~ `1.04 / sqrt(m)`. |
+| **Count-Min Sketch** | Detecting trending hashtags/searches in real time, DDoS / network traffic anomaly detection, API rate limiting. | Frequency Estimation (Heavy Hitters) | `Update`, `Estimate` | `O(d)` | Array (`d x w`) | **Overestimates** frequencies; **Never underestimates**. |
+| **MinHash** | Near-duplicate document detection (web crawlers, plagiarism checkers), recommendation engine similarity, gene clustering. | Jaccard Similarity Estimation | `Add`, `Similarity` | `O(k)` | Fixed signature vector | Standard error related to signature size `k`. |
+| **t-Digest / Q-Digest** | SLA monitoring (P99/P99.9 response latencies), real-time financial metrics, distribution tracking (Datadog, Prometheus). | Quantile & Percentile Estimation | `Add`, `Quantile` | `O(log k)` | Small (Centroids) | High accuracy at extreme percentiles (99th, 99.9th). |
+
+---
+
+## Detailed Overview
+
+### 1. Bloom Filter
+* **Goal:** Test if an element is in a set.
+* **How it works:** Uses a bit array of size `m` and `k` independent hash functions. When inserting, set the bit at each hash index to `1`. When checking membership, if all `k` hashed bit positions are `1`, it *might* be in the set; if any bit is `0`, it is *definitely not*.
+* **Use Cases:** Web cache filtering, malicious URL checking, database indexing (reducing disk lookups).
+
+### 2. Counting Bloom Filter
+* **Goal:** Extend Bloom Filter to support deletions.
+* **How it works:** Replaces single bits in the array with small counters. Insertion increments the counter at each hash index, while deletion decrements them.
+* **Use Cases:** Dynamic streaming applications, tracking active IP connections where items expire/leave the set.
+
+### 3. Cuckoo Filter
+* **Goal:** Alternative to Bloom Filters supporting deletions and dynamic resizing with better space efficiency at low error rates.
+* **How it works:** Uses cuckoo hashing to store short *fingerprints* (small hash values) of keys in two candidate buckets. If a bucket is full, it kicks out an existing entry to its alternative location.
+* **Use Cases:** High-performance CDNs, resource-constrained set membership, dynamic routing tables.
+
+### 4. HyperLogLog (HLL)
+* **Goal:** Estimate the number of unique elements (cardinality) in a stream.
+* **How it works:** Tracks the maximum number of leading zeros in the binary representation of hashed elements. Elements are split into buckets to reduce variance (harmonic mean of estimates).
+* **Use Cases:** Counting unique website visitors (DAU/MAU), SQL `COUNT(DISTINCT)` queries in databases like Redis, BigQuery, and Presto.
+
+### 5. Count-Min Sketch
+* **Goal:** Estimate frequency of items in a stream.
+* **How it works:** Maintains a 2D array of counters with `d` rows and `w` columns. Each row uses a different hash function. When an item arrives, increment the counter at `(row, hash_i(item))`. The estimated frequency is the **minimum** value across all `d` rows for that item.
+* **Use Cases:** Detecting top trends, heavy hitters in network traffic, frequency-based rate limiting.
+
+### 6. MinHash
+* **Goal:** Estimate the Jaccard similarity between two large sets without storing full sets.
+* **How it works:** Hashes elements of a set using `k` different hash functions and tracks the minimum hash value for each function. The proportion of matching minimum hash values between two sets estimates their overlap.
+* **Use Cases:** Near-duplicate document detection, recommendation systems, genomic sequence clustering.
+
+### 7. t-Digest / Q-Digest
+* **Goal:** Estimate quantiles and percentiles over streaming numeric data.
+* **How it works:** Groups data points into flexible centroids. `t-Digest` adjusts centroid sizes dynamically so that extreme percentiles (e.g., 99th or 99.9th percentile) have high precision.
+* **Use Cases:** SLA monitoring (P99/P99.9 latencies), real-time financial risk metrics, observability platforms.
+
+---
+
+## Common Trade-offs
+* **Space vs. Error Rate:** Lowering the acceptable error rate (e.g., false positive probability) requires increasing memory allocated to bit arrays, hashes, or counters.
+* **No Reversibility:** These structures store summaries or bit representations; you cannot retrieve the original inserted items from them.
+
 
 
 
